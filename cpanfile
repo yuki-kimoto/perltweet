@@ -5,3 +5,4 @@ requires 'Time::HiRes', '== 1.9725';
 requires 'Validator::Custom', '== 0.15';
 requires 'DBIx::Connector', '== 0.53';
 requires 'DBD::mysql', '== 4.025';
+requires 'Net::Twitter::Lite', '== 0.12000';

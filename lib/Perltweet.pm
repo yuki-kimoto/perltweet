@@ -10,6 +10,7 @@ use Mojolicious::Plugin::AutoRoute::Util 'template';
 use Carp 'croak';
 
 has 'dbi';
+has 'twitter';
 
 sub startup {
   my $self = shift;
