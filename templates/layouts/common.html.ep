@@ -1,0 +1,86 @@
+<%
+  my $api = wiki_api;
+  
+  my $wiki_id = param('wiki_id');
+  my $page_name = param('page_name');
+  
+  my $wiki_title = app->dbi->model('wiki')->select('title', id => $wiki_id)->value // 'None';
+  my $title = stash('title') || 'RingoWiki';
+%>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title><%= $title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    %= javascript '/js/jquery-1.7.1.min.js';
+    %= javascript '/js/bootstrap.min.js';
+    
+    %= stylesheet '/css/bootstrap.css';
+    %= stylesheet '/css/common.css';
+    <style>
+      .navbar-static-top {
+        margin-bottom: 19px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Static navbar -->
+    <div class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="<%= url_for '/' %>"><%= $wiki_title %></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <!-- Menu for wiki page -->
+            <li> <a href="<%= url_for("/_pages") %>">Pages</a> </li>
+            <li> <a href="<%= url_for("/_search") %>">Search</a> </li>
+            <li> <a href="<%= url_for("/_wiki-history") %>">Wiki History</a> </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            % if ($api->logined) {
+              <li> <a href="<%= url_for("/_create") %>">New</a> </li>
+            % }
+            % if (defined $page_name && length $page_name) {
+              % warn $page_name;
+              % if ($api->logined) {
+                <li> <a href="<%= url_for("/_edit/$page_name") %>">Edit</a> </li>
+              % }
+              <li> <a href="<%= url_for("/_page-history/$page_name") %>">Page History</a> </li>
+            % }
+            % if ($api->logined_admin) {
+              <li> <a href="<%= url_for '/_admin' %>">Admin</a></li>
+            % }
+            % if ($api->logined) {
+              <li> <a href="<%= url_for '/_logout' %>">Sign out</a></li>
+            % } else {
+              <li> <a href="<%= url_for('/_login')->query(back => url_with->to_abs->to_string) %>">Sign in</a></li>
+            % }
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <!-- Content -->
+        <div class="col-md-9">
+            %= content
+        </div>
+        <!-- Sidebar -->
+        <div class="col-md-3">
+          %= include 'includes/sidebar'
+        </div>
+        <!---->
+      </div>
+    </div> <!-- /container -->
+    %= include '/includes/footer';
+  </body>
+</html>
