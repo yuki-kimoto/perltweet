@@ -1,18 +1,53 @@
 <%
-  my $tweets = app->dbi->model('tweet')->select(
-    append => 'limit 0, 300'
-  )->all;
+  use Time::Piece ();
+  use Time::Seconds 'ONE_DAY';
+  use Encode ();
   
-  warn dumper $tweets;
+  my $date = param('date');
+  
+  my $tweets;
+  my $date_tp;
+  my $before_date_tp;
+  my $after_date_tp;
+  my $date_wa;
+  if ($date) {
+    # Date tweets
+    $date_tp = Time::Piece->strptime($date, '%Y%m%d');
+    my $date_db = $date_tp->strftime('%Y-%m-%d');
+    $date_wa = Encode::decode('UTF-8', $date_tp->strftime('%Y年%m月%d日'));
+    $tweets = app->dbi->model('tweet')->select(
+      where => {created_at_date => $date_db}
+    )->all;
+    $before_date_tp = $date_tp - ONE_DAY;
+    $after_date_tp = $date_tp + ONE_DAY;
+  }
+  else {
+    # Latest tweets
+    $tweets = app->dbi->model('tweet')->select(
+      append => 'limit 0, 300'
+    )->all;
+  }
+  
 %>
 
 % layout 'common';
+
+%= stylesheet begin
+  h1 a {
+    color:black;
+  }
+  h1 a:hover {
+    color:blue;
+    color:gray;
+  }
+% end
+
 <html>
   <head>
-    <title>Perlツイートタイムラインニュース</title>
+    <title>Perlツイートタイムラインニュース<%= $date_wa ? " - $date_wa" : '' %></title>
   </head>
   <body>
-    <h1 style="margin-left:15px">Perlツイートタイムラインニュース</h1>
+    <h1 class="title" style="margin-left:15px"><a href="<%= url_for('/') %>">Perlツイートタイムラインニュース</a></h1>
     <ul>
       % for (my $i = 0; $i < @$tweets; $i++) {
         % my $tweet = $tweets->[$i];
@@ -29,6 +64,41 @@
           
         </li>
       % }
+    </ul>
+    <hr>
+    <ul class="list-unstyled" style="text-align:center">
+      % if ($date) {
+        % my $before_date_tp = $date_tp - ONE_DAY;
+        % my $before_date_url = $before_date_tp->strftime('%Y%m%d');
+        % my $before_date_wa = Encode::decode('UTF-8', $before_date_tp->strftime('%Y年%m月%d日'));
+        <li style="display:inline; margin-left:20px;">
+          <a href="<%= url_for->query(date => $before_date_url) %>"><%= $before_date_wa %>(前の日)</a>
+        </li>
+        
+        % my $after_date_tp = $date_tp + ONE_DAY;
+        % my $after_date_url = $after_date_tp->strftime('%Y%m%d');
+        % my $after_date_wa = Encode::decode('UTF-8', $after_date_tp->strftime('%Y年%m月%d日'));
+        <li style="display:inline; margin-left:20px;">
+          <a href="<%= url_for->query(date => $after_date_url) %>"><%= $after_date_wa %>(次の日)</a>
+        </li>
+      % } else {
+        % my $today_tp = Time::Piece::localtime;
+        % my $yesterday_tp = $today_tp - ONE_DAY;
+        % my $yesterday_url = $yesterday_tp->strftime('%Y%m%d');
+        % my $yesterday_wa = Encode::decode('UTF-8', $yesterday_tp->strftime('%Y年%m月%d日'));
+        <li style="display:inline; margin-left:20px;">
+          <a href="<%= url_for->query(date => $yesterday_url) %>"><%= $yesterday_wa %>(昨日)</a>
+        </li>
+        
+        % my $today_url = $today_tp->strftime('%Y%m%d');
+        % my $today_wa = Encode::decode('UTF-8', $today_tp->strftime('%Y年%m月%d日'));
+        <li style="display:inline; margin-left:20px;">
+          <a href="<%= url_for->query(date => $today_url) %>"><%= $today_wa %>(今日)</a>
+        </li>
+      % }
+      
+
+      
     </ul>
   </body>
 </html>

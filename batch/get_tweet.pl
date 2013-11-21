@@ -48,6 +48,7 @@ for my $tweet (@$tweets) {
   my $created_at_tp = localtime Time::Piece->strptime($created_at, "%a %b %d %T %z %Y");
   $created_at_tp += 9 * ONE_HOUR;
   my $created_at_mysql_dt = $created_at_tp->strftime('%Y-%m-%d %H:%M:%S');
+  my $created_at_mysql_date = $created_at_tp->strftime('%Y-%m-%d');
   my $retweet_count = $tweet->{retweet_count};
   my $user_screen_name = $tweet->{user}{screen_name};
   
@@ -57,6 +58,7 @@ for my $tweet (@$tweets) {
     tweet_text => $text,
     url => $url,
     created_at => $created_at_mysql_dt,
+    created_at_date => $created_at_mysql_date,
     retweet_count => $retweet_count,
     user_screen_name => $user_screen_name
   };

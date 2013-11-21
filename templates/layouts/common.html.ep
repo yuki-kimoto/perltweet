@@ -12,5 +12,6 @@
 
   <body>
     %= content_for;
+    %= include '/include/footer';
   </body>
 </html>
