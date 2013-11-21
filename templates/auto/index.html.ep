@@ -1,1 +1,33 @@
-aaa
+<%
+  my $tweets = app->dbi->model('tweet')->select(
+    append => 'limit 0, 100'
+  )->all;
+  
+  warn dumper $tweets;
+%>
+
+% layout 'common';
+<html>
+  <head>
+    <title>Perlツイートタイムラインニュース</title>
+  </head>
+  <body>
+    <h1>Perlツイートタイムラインニュース</h1>
+    <ul>
+      % for my $tweet (@$tweets) {
+        <li>
+          % my $url = $tweet->{url};
+          % if ($url) {
+            <a href="<%= $url %>"><%= $tweet->{tweet_text} %></a>
+          % } else {
+            <%= $tweet->{tweet_text} %>
+          % }
+          (<a target="_blank" href="<%= "https://twitter.com/$tweet->{user_screen_name}/status/$tweet->{id}" %>"><%= $tweet->{user_screen_name} %></a>
+          
+          <small style="color:gray"><%= $tweet->{created_at} %></small>)
+          
+        </li>
+      % }
+    </ul>
+  </body>
+</html>

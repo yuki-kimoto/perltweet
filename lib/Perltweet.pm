@@ -39,6 +39,7 @@ sub startup {
     # Tweet
     {
       table => 'tweet',
+      primary_key => 'id'
     }
   ];
   $dbi->create_model($_) for @$models;
