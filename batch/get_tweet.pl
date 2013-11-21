@@ -7,6 +7,7 @@ use FindBin;
 use lib "$FindBin::Bin/../extlib/lib/perl5";
 use Mojo::Server;
 use Net::Twitter::Lite::WithAPIv1_1;
+use Time::Piece;
 
 # Config
 my $app = Mojo::Server->new->load_app("$FindBin::Bin/../script/perltweet");
@@ -21,15 +22,23 @@ my $nt = Net::Twitter::Lite::WithAPIv1_1->new(
 );
 
 # Search
-my $query = {q => 'perl', count => 1, lang => 'ja', result_type => 'recent'};
-my $tweets = $nt->search($query);
+my $query = {q => 'perl', count => 2, lang => 'ja', result_type => 'recent'};
+my $search_metadata = $nt->search($query);
+my $tweets = $search_metadata->{statuses};
 
-# Require item
-
-# URLの一つ目
-# ユーザー
-# コメント
-# リツイート数
-# 言語
+for my $tweet (@$tweets) {
+  my $id = $tweet->{id};
+  my $original_text = $tweet->{text};
+  my $text = $original_text;
+  $text =~ s#http(s)?://.+?( |$)##g;
+  
+  my $url = $tweet->{urls}[0]{expanded_url};
+  
+  my $created_at = $tweet->{created_at};
+  my $created_at_tp = localtime Time::Piece->strptime($created_at, "%a %b %d %T %z %Y");
+  $created_at_tp += 
+  my $retweet_count = $tweet->{retweet_count};
+  my $screen_name = $tweet->{screen_name};
+}
 
 1;

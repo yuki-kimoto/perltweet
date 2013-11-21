@@ -6,3 +6,6 @@ requires 'Validator::Custom', '== 0.15';
 requires 'DBIx::Connector', '== 0.53';
 requires 'DBD::mysql', '== 4.025';
 requires 'Net::Twitter::Lite', '== 0.12004';
+requires 'Math::BigInt', '== 1.997';
+requires 'Time::Piece', '== 1.23';
+
