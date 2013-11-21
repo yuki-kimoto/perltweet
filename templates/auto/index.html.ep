@@ -1,6 +1,6 @@
 <%
   my $tweets = app->dbi->model('tweet')->select(
-    append => 'limit 0, 100'
+    append => 'limit 0, 300'
   )->all;
   
   warn dumper $tweets;
@@ -12,10 +12,11 @@
     <title>Perlツイートタイムラインニュース</title>
   </head>
   <body>
-    <h1>Perlツイートタイムラインニュース</h1>
+    <h1 style="margin-left:15px">Perlツイートタイムラインニュース</h1>
     <ul>
-      % for my $tweet (@$tweets) {
-        <li>
+      % for (my $i = 0; $i < @$tweets; $i++) {
+        % my $tweet = $tweets->[$i];
+        <li style="<%= ($i + 1) % 10 == 0 ? 'margin-bottom:20px' : '' %>">
           % my $url = $tweet->{url};
           % if ($url) {
             <a href="<%= $url %>"><%= $tweet->{tweet_text} %></a>
