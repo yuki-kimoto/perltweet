@@ -8,6 +8,7 @@ use lib "$FindBin::Bin/../extlib/lib/perl5";
 use Mojo::Server;
 use Net::Twitter::Lite::WithAPIv1_1;
 use Time::Piece;
+use Time::Seconds 'ONE_HOUR';
 
 # Config
 my $app = Mojo::Server->new->load_app("$FindBin::Bin/../script/perltweet");
@@ -36,9 +37,11 @@ for my $tweet (@$tweets) {
   
   my $created_at = $tweet->{created_at};
   my $created_at_tp = localtime Time::Piece->strptime($created_at, "%a %b %d %T %z %Y");
-  $created_at_tp += 
+  $created_at_tp += 9 * ONE_HOUR;
+  my $create_at_mysql_dt = $created_at_tp->strftime('%Y-%m-%d %H:%M:%S');
+  
   my $retweet_count = $tweet->{retweet_count};
-  my $screen_name = $tweet->{screen_name};
+  my $user_screen_name = $tweet->{user}{screen_name};
 }
 
 1;
