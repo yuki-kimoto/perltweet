@@ -46,6 +46,17 @@ sub startup {
   
   # Route
   my $r = $self->routes;
+  
+  # DBViewer(development)
+  if ($self->mode eq 'development') {
+    $self->plugin(
+      'DBViewer',
+      dsn => $config->{db_dsn},
+      user => $config->{db_user},
+      password => $config->{db_password},
+      connector => 1
+    )
+  }
 
   # Auto routes
   $self->plugin('AutoRoute', route => $r);
