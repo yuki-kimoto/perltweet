@@ -49,7 +49,7 @@
   </head>
   <body>
     <h1 class="title" style="margin-left:15px"><a href="<%= url_for('/') %>">Perlツイートタイムラインニュース(βリリース)</a></h1>
-    % if ($date_wa)
+    % if ($date_wa) {
       <h2><%= $date_wa %></h2>
     % }
     <ul>
