@@ -45,7 +45,7 @@
 
 <html>
   <head>
-    <title>Perlツイートタイムラインニュース<%= $date_wa ? " - $date_wa" : '' %></title>
+    <title>Perlツイートタイムラインニュース(βリリース) <%= $date_wa ? " - $date_wa" : '' %></title>
   </head>
   <body>
     <h1 class="title" style="margin-left:15px"><a href="<%= url_for('/') %>">Perlツイートタイムラインニュース</a></h1>
