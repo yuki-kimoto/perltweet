@@ -45,10 +45,13 @@
 
 <html>
   <head>
-    <title>Perlツイートタイムラインニュース(βリリース) <%= $date_wa ? " - $date_wa" : '' %></title>
+    <title>Perlツイートタイムラインニュース <%= $date_wa ? " - $date_wa" : '' %></title>
   </head>
   <body>
-    <h1 class="title" style="margin-left:15px"><a href="<%= url_for('/') %>">Perlツイートタイムラインニュース</a></h1>
+    <h1 class="title" style="margin-left:15px"><a href="<%= url_for('/') %>">Perlツイートタイムラインニュース(βリリース)</a></h1>
+    % if ($date_wa)
+      <h2><%= $date_wa %></h2>
+    % }
     <ul>
       % for (my $i = 0; $i < @$tweets; $i++) {
         % my $tweet = $tweets->[$i];
