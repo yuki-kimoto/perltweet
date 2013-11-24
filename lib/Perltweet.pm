@@ -61,6 +61,8 @@ sub startup {
   # Auto routes
   $self->plugin('AutoRoute', route => $r);
   
+  $r->get('/date/:date', {date => qr/[0-9]{8}/} => template 'auto/index');
+  
   # Helper
   $self->helper(wiki_api => sub { Perltweet::API->new(shift) });
 }

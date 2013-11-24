@@ -141,14 +141,14 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
           % my $before_date_url = $before_date_tp->strftime('%Y%m%d');
           % my $before_date_wa = Encode::decode('UTF-8', $before_date_tp->strftime('%Y年%m月%d日'));
           <li style="display:inline; margin-left:20px;">
-            <a href="<%= url_for->query(date => $before_date_url) %>"><%= $before_date_wa %>(前の日)</a>
+            <a href="<%= url_for("/date/$before_date_url") %>"><%= $before_date_wa %>(前の日)</a>
           </li>
           
           % my $after_date_tp = $date_tp + ONE_DAY;
           % my $after_date_url = $after_date_tp->strftime('%Y%m%d');
           % my $after_date_wa = Encode::decode('UTF-8', $after_date_tp->strftime('%Y年%m月%d日'));
           <li style="display:inline; margin-left:20px;">
-            <a href="<%= url_for->query(date => $after_date_url) %>"><%= $after_date_wa %>(次の日)</a>
+            <a href="<%= url_for("/date/$after_date_url") %>"><%= $after_date_wa %>(次の日)</a>
           </li>
         % } else {
           % my $today_tp = Time::Piece::localtime;
@@ -156,13 +156,13 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
           % my $yesterday_url = $yesterday_tp->strftime('%Y%m%d');
           % my $yesterday_wa = Encode::decode('UTF-8', $yesterday_tp->strftime('%Y年%m月%d日'));
           <li style="display:inline; margin-left:20px;">
-            <a href="<%= url_for->query(date => $yesterday_url) %>"><%= $yesterday_wa %>(昨日)</a>
+            <a href="<%= url_for("/date/$yesterday_url") %>"><%= $yesterday_wa %>(昨日)</a>
           </li>
           
           % my $today_url = $today_tp->strftime('%Y%m%d');
           % my $today_wa = Encode::decode('UTF-8', $today_tp->strftime('%Y年%m月%d日'));
           <li style="display:inline; margin-left:20px;">
-            <a href="<%= url_for->query(date => $today_url) %>"><%= $today_wa %>(今日)</a>
+            <a href="<%= url_for("/date/$today_url") %>"><%= $today_wa %>(今日)</a>
           </li>
         % }
       </ul>
