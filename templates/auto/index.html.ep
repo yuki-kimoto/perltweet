@@ -25,7 +25,7 @@
   else {
     # Latest tweets
     $tweets = app->dbi->model('tweet')->select(
-      append => 'order by id desc limit 0, 300'
+      append => 'order by id desc limit 0, 100'
     )->all;
   }
   
@@ -41,6 +41,7 @@
     color:blue;
     color:gray;
   }
+
 % end
 
 <html>
@@ -55,52 +56,28 @@
       % }
 
       <div>
-<script type="text/javascript"><!--
-google_ad_client = "ca-pub-7761029077825443";
-/* ヘッダーの横長1 */
-google_ad_slot = "6941216967";
-google_ad_width = 728;
-google_ad_height = 90;
-//-->
+<style>
+.my_adslot { width: 320px; height: 50px; }
+@media(min-width: 500px) { .my_adslot { width: 468px; height: 60px; } }
+@media(min-width: 800px) { .my_adslot { width: 728px; height: 90px; } }
+</style>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- レスポンシブル -->
+<ins class="adsbygoogle my_adslot"
+     style="display:inline-block"
+     data-ad-client="ca-pub-7761029077825443"
+     data-ad-slot="1687374568"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-      </div>
-
-      <div>
-<script type="text/javascript"><!--
-google_ad_client = "ca-pub-7761029077825443";
-/* リンクユニット1 */
-google_ad_slot = "7506829761";
-google_ad_width = 728;
-google_ad_height = 15;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-<script type="text/javascript"><!--
-google_ad_client = "ca-pub-7761029077825443";
-/* リンクユニット2 */
-google_ad_slot = "8816622560";
-google_ad_width = 728;
-google_ad_height = 15;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-<script type="text/javascript"><!--
-google_ad_client = "ca-pub-7761029077825443";
-/* リンクユニット3 */
-google_ad_slot = "2630488160";
-google_ad_width = 728;
-google_ad_height = 15;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- レスポンシブル -->
+<ins class="adsbygoogle my_adslot"
+     style="display:inline-block"
+     data-ad-client="ca-pub-7761029077825443"
+     data-ad-slot="1687374568"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
 </script>
       </div>
 
@@ -122,16 +99,19 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
         % }
       </ul>
 
-<script type="text/javascript"><!--
-google_ad_client = "ca-pub-7761029077825443";
-/* 記事の下大 */
-google_ad_slot = "4989708563";
-google_ad_width = 336;
-google_ad_height = 280;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+<style>
+.my_adslot { width: 320px; height: 50px; }
+@media(min-width: 500px) { .my_adslot { width: 468px; height: 60px; } }
+@media(min-width: 800px) { .my_adslot { width: 728px; height: 90px; } }
+</style>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- レスポンシブル -->
+<ins class="adsbygoogle my_adslot"
+     style="display:inline-block"
+     data-ad-client="ca-pub-7761029077825443"
+     data-ad-slot="1687374568"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 
       <hr>
