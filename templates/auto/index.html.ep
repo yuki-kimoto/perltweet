@@ -53,6 +53,57 @@
       % if ($date_wa) {
         <h2><%= $date_wa %></h2>
       % }
+
+      <div>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-7761029077825443";
+/* ヘッダーの横長1 */
+google_ad_slot = "6941216967";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+      </div>
+
+      <div>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-7761029077825443";
+/* リンクユニット1 */
+google_ad_slot = "7506829761";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-7761029077825443";
+/* リンクユニット2 */
+google_ad_slot = "8816622560";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-7761029077825443";
+/* リンクユニット3 */
+google_ad_slot = "2630488160";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+      </div>
+
       <ul>
         % for (my $i = 0; $i < @$tweets; $i++) {
           % my $tweet = $tweets->[$i];
@@ -70,6 +121,19 @@
           </li>
         % }
       </ul>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-7761029077825443";
+/* 記事の下大 */
+google_ad_slot = "4989708563";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
       <hr>
       <ul class="list-unstyled" style="text-align:center">
         % if ($date) {
