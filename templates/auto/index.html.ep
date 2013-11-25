@@ -25,7 +25,7 @@
   else {
     # Latest tweets
     $tweets = app->dbi->model('tweet')->select(
-      append => 'order by id desc limit 0, 100'
+      append => 'order by id desc limit 0, 200'
     )->all;
   }
   
