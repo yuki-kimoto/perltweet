@@ -4,6 +4,7 @@
   use Encode ();
   
   my $date = param('date');
+  my $format = param('format') // '';
   
   my $tweets;
   my $date_tp;
@@ -29,6 +30,10 @@
     )->all;
   }
   
+  if ($format eq 'json') {
+    $self->render(json => $tweets);
+    return;
+  }
 %>
 
 % layout 'common';
