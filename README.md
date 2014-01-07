@@ -51,27 +51,27 @@ Web application to display tweet related to Perl.
 という名前で作成します。内容は以下のようになります。
 データベースの情報とTwitter APIの情報です。
 
-  {
-    db_dsn => 'dbi:mysql:database=perltweet',
-    db_user => 'perltweet',
-    db_password => 'password&%@',
-    twitter_consumer_key => 'b7PCjuOlr62E9l4otrQXo',
-    twitter_consumer_secret => 'fT2GSnTlf5SXGh3IOfIwHMfkS4Aliqd7U7MGdY1Ao',
-    twitter_access_token => '482047902-3w1RzVUyNPXsjyeEjSYrNOLIOrIRyRjxVEojS0oo',
-    twitter_access_token_secret => 'Vp7K12hh0IpTbFVoRvxelQFbb8ujYgZytuur96PXo'
-  }
+    {
+      db_dsn => 'dbi:mysql:database=perltweet',
+      db_user => 'perltweet',
+      db_password => 'password&%@',
+      twitter_consumer_key => 'b7PCjuOlr62E9l4otrQXo',
+      twitter_consumer_secret => 'fT2GSnTlf5SXGh3IOfIwHMfkS4Aliqd7U7MGdY1Ao',
+      twitter_access_token => '482047902-3w1RzVUyNPXsjyeEjSYrNOLIOrIRyRjxVEojS0oo',
+      twitter_access_token_secret => 'Vp7K12hh0IpTbFVoRvxelQFbb8ujYgZytuur96PXo'
+    }
 
 ### アプリケーションの実行
 
 アプリケーションを実行します。
 
-  ./perltweet
+    ./perltweet
 
 http://localhost:10060などでアクセスできます。
 
 ### アプリケーションの停止
 
-  ./perltweet --stop
+    ./perltweet --stop
 
 ### crontabの設定
 
