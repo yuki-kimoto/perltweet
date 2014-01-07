@@ -83,3 +83,7 @@ Tweetを定期的に取得するスクリプトを実行。PATH、MAILTO、cron�
       
     # Perl tweet
     2,17,32,47 * * * * $HOME/labo/perltweet/batch/get_tweet.pl
+
+### 注意
+
+もしかしたらOSが64bitじゃないと、内部的な足し算でエラーが出るかもしれません。(スクリプトの修正で対処は可能)
