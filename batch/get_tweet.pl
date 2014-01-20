@@ -22,7 +22,8 @@ my $nt = Net::Twitter::Lite::WithAPIv1_1->new(
   consumer_key => $config->{twitter_consumer_key},
   consumer_secret => $config->{twitter_consumer_secret},
   access_token        => $config->{twitter_access_token},
-  access_token_secret => $config->{twitter_access_token_secret}
+  access_token_secret => $config->{twitter_access_token_secret},
+  ssl => 1
 );
 
 # Max ID
