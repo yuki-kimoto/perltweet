@@ -2,6 +2,29 @@
   use Time::Piece ();
   use Time::Seconds 'ONE_DAY';
   use Encode ();
+
+  # Locale
+  my $language = config('language') // '';
+  my %l;
+  # Japanese
+  if ($language eq 'ja') {
+    $l{title} = 'Perlツイートタイムラインニュース';
+    $l{yesterday} = '昨日';
+    $l{today} = '今日';
+    $l{previous_date} = '前の日';
+    $l{next_date} = '次の日';
+    $l{ymd_format} = '%Y年%m月%d日';
+  }
+  
+  # English
+  else {
+    $l{title} = 'Perl Tweet Time Line News';
+    $l{yesterday} = 'Yesterday';
+    $l{today} = 'Today';
+    $l{previous_date} = 'Previous date';
+    $l{after_date} = 'Next date';
+    $l{ymd_format} = '%Y/%m/%d';
+  }
   
   my $date = param('date');
   my $format = param('format') // '';
@@ -15,7 +38,7 @@
     # Date tweets
     $date_tp = Time::Piece->strptime($date, '%Y%m%d');
     my $date_db = $date_tp->strftime('%Y-%m-%d');
-    $date_wa = Encode::decode('UTF-8', $date_tp->strftime('%Y年%m月%d日'));
+    $date_wa = Encode::decode('UTF-8', $date_tp->strftime($l{ymd_format}));
     $tweets = app->dbi->model('tweet')->select(
       where => {created_at_date => $date_db},
       append => 'order by id desc'
@@ -34,6 +57,7 @@
     $self->render(json => $tweets);
     return;
   }
+  
 %>
 
 % layout 'common';
@@ -51,11 +75,11 @@
 
 <html>
   <head>
-    <title>Perlツイートタイムラインニュース <%= $date_wa ? " - $date_wa" : '' %></title>
+    <title><%= $l{title} %> <%= $date_wa ? " - $date_wa" : '' %></title>
   </head>
   <body>
     <div class="container">
-      <h1 class="title"><a href="<%= url_for('/') %>">Perlツイートタイムラインニュース</a></h1>
+      <h1 class="title"><a href="<%= url_for('/') %>"><%= $l{title} %></a></h1>
       % if ($date_wa) {
         <h2><%= $date_wa %></h2>
       % }
@@ -124,30 +148,30 @@
         % if ($date) {
           % my $before_date_tp = $date_tp - ONE_DAY;
           % my $before_date_url = $before_date_tp->strftime('%Y%m%d');
-          % my $before_date_wa = Encode::decode('UTF-8', $before_date_tp->strftime('%Y年%m月%d日'));
+          % my $before_date_wa = Encode::decode('UTF-8', $before_date_tp->strftime($l{ymd_format}));
           <li style="display:inline; margin-left:20px;">
-            <a href="<%= url_for("/date/$before_date_url") %>"><%= $before_date_wa %>(前の日)</a>
+            <a href="<%= url_for("/date/$before_date_url") %>"><%= $before_date_wa %>(<%= $l{previous_date} %>)</a>
           </li>
           
           % my $after_date_tp = $date_tp + ONE_DAY;
           % my $after_date_url = $after_date_tp->strftime('%Y%m%d');
-          % my $after_date_wa = Encode::decode('UTF-8', $after_date_tp->strftime('%Y年%m月%d日'));
+          % my $after_date_wa = Encode::decode('UTF-8', $after_date_tp->strftime($l{ymd_format}));
           <li style="display:inline; margin-left:20px;">
-            <a href="<%= url_for("/date/$after_date_url") %>"><%= $after_date_wa %>(次の日)</a>
+            <a href="<%= url_for("/date/$after_date_url") %>"><%= $after_date_wa %>(<%= $l{next_date} %>)</a>
           </li>
         % } else {
           % my $today_tp = Time::Piece::localtime;
           % my $yesterday_tp = $today_tp - ONE_DAY;
           % my $yesterday_url = $yesterday_tp->strftime('%Y%m%d');
-          % my $yesterday_wa = Encode::decode('UTF-8', $yesterday_tp->strftime('%Y年%m月%d日'));
+          % my $yesterday_wa = Encode::decode('UTF-8', $yesterday_tp->strftime($l{ymd_format}));
           <li style="display:inline; margin-left:20px;">
-            <a href="<%= url_for("/date/$yesterday_url") %>"><%= $yesterday_wa %>(昨日)</a>
+            <a href="<%= url_for("/date/$yesterday_url") %>"><%= $yesterday_wa %>(<%= $l{yesterday} %>)</a>
           </li>
           
           % my $today_url = $today_tp->strftime('%Y%m%d');
-          % my $today_wa = Encode::decode('UTF-8', $today_tp->strftime('%Y年%m月%d日'));
+          % my $today_wa = Encode::decode('UTF-8', $today_tp->strftime($l{ymd_format}));
           <li style="display:inline; margin-left:20px;">
-            <a href="<%= url_for("/date/$today_url") %>"><%= $today_wa %>(今日)</a>
+            <a href="<%= url_for("/date/$today_url") %>"><%= $today_wa %>(<%= $l{today} %>)</a>
           </li>
         % }
       </ul>
