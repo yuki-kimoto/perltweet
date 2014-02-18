@@ -21,4 +21,5 @@ script/hypnotoad.pid
 !public/.gitignore
 script/hypnotoad.pid
 password.conf
+perltweet.my.conf
 

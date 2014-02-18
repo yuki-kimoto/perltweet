@@ -18,8 +18,14 @@ sub startup {
   # Config file
   $self->plugin('Config');
   
+  # My Config file
+  if (-f $self->home->rel_file('perltweet.my.conf')) {
+    $self->plugin('Config', file => $self->home->rel_file('perltweet.my.conf'));
+  }
+  
   # Password
   $self->plugin('Config', file => $self->home->rel_file('password.conf'));
+  
   
   # Config
   my $config = $self->config;

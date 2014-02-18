@@ -22,8 +22,8 @@
     $l{yesterday} = 'Yesterday';
     $l{today} = 'Today';
     $l{previous_date} = 'Previous date';
-    $l{after_date} = 'Next date';
-    $l{ymd_format} = '%Y/%m/%d';
+    $l{next_date} = 'Next date';
+    $l{ymd_format} = '%Y-%m-%d';
   }
   
   my $date = param('date');
