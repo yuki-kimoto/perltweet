@@ -14,6 +14,8 @@
     $l{previous_date} = '前の日';
     $l{next_date} = '次の日';
     $l{ymd_format} = '%Y年%m月%d日';
+    $l{keywords} = 'Perlに関連する最新のTwitterのツイートを収集してニュースのように表示しています。';
+    $l{description} = 'Perl,Twitter,ツイッター,ツイート,ニュース,最新,技術,ブログ';
   }
   
   # English
@@ -24,6 +26,8 @@
     $l{previous_date} = 'Previous date';
     $l{next_date} = 'Next date';
     $l{ymd_format} = '%Y-%m-%d';
+    $l{keywords} = 'Perl related latest Twitter tweet is displayed as news';
+    $l{description} = 'Perl,Twitter,Tweet,News,Latest,Tequnique,blog';
   }
   
   my $date = param('date');
@@ -60,7 +64,7 @@
   
 %>
 
-% layout 'common';
+% layout 'common', l => \%l;
 
 %= stylesheet begin
   h1 a {
@@ -91,7 +95,6 @@
 @media(min-width: 800px) { .my_adslot { width: 728px; height: 90px; } }
 </style>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- レスポンシブル -->
 <ins class="adsbygoogle my_adslot"
      style="display:inline-block"
      data-ad-client="ca-pub-7761029077825443"
@@ -100,7 +103,6 @@
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- レスポンシブル -->
 <ins class="adsbygoogle my_adslot"
      style="display:inline-block"
      data-ad-client="ca-pub-7761029077825443"
@@ -134,7 +136,6 @@
 @media(min-width: 800px) { .my_adslot { width: 728px; height: 90px; } }
 </style>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- レスポンシブル -->
 <ins class="adsbygoogle my_adslot"
      style="display:inline-block"
      data-ad-client="ca-pub-7761029077825443"

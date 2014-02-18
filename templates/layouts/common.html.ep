@@ -2,10 +2,10 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Perlツイートタイムラインニュース</title>
+    <title><%= $l->{title} %></title>
     <link rel="shortcut icon" href="<%= url_for('/perltweet-favicon.png') %>" type="image/png" >
-    <meta name="description" content="Perlに関連する最新のTwitterのツイートを収集してニュースのように表示しています。">
-    <meta name="keywords" content="Perl,Twitter,ツイッター,ツイート,ニュース,最新,技術,ブログ">
+    <meta name="description" content="<%= $l->{description} %>">
+    <meta name="keywords" content="<%= $l->{keywords} %>">
     <meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 
     %= javascript '/js/jquery-1.10.2.js';
