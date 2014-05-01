@@ -8,4 +8,5 @@ requires 'DBD::mysql', '== 4.025';
 requires 'Net::Twitter::Lite', '== 0.12004';
 requires 'Math::BigInt', '== 1.997';
 requires 'Time::Piece', '== 1.23';
+requires 'Net::OAuth', '== 0.28';
 
