@@ -29,42 +29,48 @@ my $nt = Net::Twitter::Lite::WithAPIv1_1->new(
 # Max ID
 my $max_id = $dbi->model('tweet')->select('max(id)')->value // 0;
 
-# Search
-my $query = {
-  q => 'perl',
-  count => 100,
-  lang => 'ja',
-  result_type => 'recent'
-};
-my $search_metadata = $nt->search($query);
-my $tweets = $search_metadata->{statuses};
+# Langages
+my $languages = ['ja', 'en'];
 
-for my $tweet (@$tweets) {
-  
-  # Tweet
-  my $id = $tweet->{id};
-  my $text = $tweet->{text};
-  my $url = $tweet->{entities}{urls}[0]{expanded_url} // '';
-  my $created_at = $tweet->{created_at};
-  my $created_at_tp = localtime Time::Piece->strptime($created_at, "%a %b %d %T %z %Y");
-  $created_at_tp += 9 * ONE_HOUR;
-  my $created_at_mysql_dt = $created_at_tp->strftime('%Y-%m-%d %H:%M:%S');
-  my $created_at_mysql_date = $created_at_tp->strftime('%Y-%m-%d');
-  my $retweet_count = $tweet->{retweet_count};
-  my $user_screen_name = $tweet->{user}{screen_name};
-  
-  # Insert database
-  my $params = {
-    id => $id,
-    tweet_text => $text,
-    url => $url,
-    created_at => $created_at_mysql_dt,
-    created_at_date => $created_at_mysql_date,
-    retweet_count => $retweet_count,
-    user_screen_name => $user_screen_name
+for my $language (@$languages) {
+
+  # Search
+  my $query = {
+    q => 'perl',
+    count => 100,
+    lang => $language,
+    result_type => 'recent'
   };
-  $dbi->model('tweet')->insert($params) if $id > $max_id;
-  
+  my $search_metadata = $nt->search($query);
+  my $tweets = $search_metadata->{statuses};
+
+  for my $tweet (@$tweets) {
+    
+    # Tweet
+    my $id = $tweet->{id};
+    my $text = $tweet->{text};
+    my $url = $tweet->{entities}{urls}[0]{expanded_url} // '';
+    my $created_at = $tweet->{created_at};
+    my $created_at_tp = localtime Time::Piece->strptime($created_at, "%a %b %d %T %z %Y");
+    $created_at_tp += 9 * ONE_HOUR;
+    my $created_at_mysql_dt = $created_at_tp->strftime('%Y-%m-%d %H:%M:%S');
+    my $created_at_mysql_date = $created_at_tp->strftime('%Y-%m-%d');
+    my $retweet_count = $tweet->{retweet_count};
+    my $user_screen_name = $tweet->{user}{screen_name};
+    
+    # Insert database
+    my $params = {
+      id => $id,
+      tweet_text => $text,
+      url => $url,
+      created_at => $created_at_mysql_dt,
+      created_at_date => $created_at_mysql_date,
+      retweet_count => $retweet_count,
+      user_screen_name => $user_screen_name,
+      language => $tweet->{lang}
+    };
+    $dbi->model('tweet')->insert($params) if $id > $max_id;
+  }
 }
 
 1;

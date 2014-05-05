@@ -44,7 +44,7 @@
     my $date_db = $date_tp->strftime('%Y-%m-%d');
     $date_wa = Encode::decode('UTF-8', $date_tp->strftime($l{ymd_format}));
     $tweets = app->dbi->model('tweet')->select(
-      where => {created_at_date => $date_db},
+      where => {created_at_date => $date_db, language => $language},
       append => 'order by id desc'
     )->all;
     $before_date_tp = $date_tp - ONE_DAY;
@@ -53,6 +53,7 @@
   else {
     # Latest tweets
     $tweets = app->dbi->model('tweet')->select(
+      where => {language => $language},
       append => 'order by id desc limit 0, 200'
     )->all;
   }
