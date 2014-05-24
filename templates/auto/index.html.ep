@@ -14,20 +14,64 @@
     $l{previous_date} = '前の日';
     $l{next_date} = '次の日';
     $l{ymd_format} = '%Y年%m月%d日';
-    $l{keywords} = 'Perlに関連する最新のTwitterのツイートを収集してニュースのように表示しています。';
-    $l{description} = 'Perl,Twitter,ツイッター,ツイート,ニュース,最新,技術,ブログ';
+    $l{description} = '最新のPerlに関連するツイートを表示しています。';
+    $l{keywords} = 'Perl,Twitter,ツイート,ニュース';
   }
   
   # English
-  else {
+  elsif ($language eq 'en') {
     $l{title} = 'Perl Tweet Time Line News';
     $l{yesterday} = 'Yesterday';
     $l{today} = 'Today';
     $l{previous_date} = 'Previous date';
     $l{next_date} = 'Next date';
     $l{ymd_format} = '%Y-%m-%d';
-    $l{keywords} = 'Perl related latest Twitter tweet is displayed as news';
-    $l{description} = 'Perl,Twitter,Tweet,News,Latest,Tequnique,blog';
+    $l{description} = 'Display latest Perl related tweet';
+    $l{keywords} = 'Perl,Twitter,Tweet,News';
+  }
+  # Chinese
+  elsif ($language eq 'zh') {
+    $l{title} = 'Perl 鸣叫 时间轴 新闻';
+    $l{yesterday} = '昨天';
+    $l{today} = '今天';
+    $l{previous_date} = '前一天';
+    $l{next_date} = '第二天';
+    $l{ymd_format} = '%Y-%m-%d';
+    $l{description} = '我有相关的最新的Perl显示鸣叫。';
+    $l{keywords} = 'Perl,Twitter,鸣叫,新闻';
+  }
+  # Spanish
+  elsif ($language eq 'es') {
+    $l{title} = 'Perl Tweet Cronología noticias';
+    $l{yesterday} = 'ayer';
+    $l{today} = 'hoy';
+    $l{previous_date} = 'Día antes';
+    $l{next_date} = 'Al día siguiente';
+    $l{ymd_format} = '%Y-%m-%d';
+    $l{description} = 'Tengo los tweets pantalla relacionados con la última Perl.';
+    $l{keywords} = 'Perl,Twitter,Tweet,noticias';
+  }
+  # Germany
+  elsif ($language eq 'de') {
+    $l{title} = 'Perl Tweet Timeline Nachrichten';
+    $l{yesterday} = 'gestern';
+    $l{today} = 'heute';
+    $l{previous_date} = 'Vortag';
+    $l{next_date} = 'Nächster Tag';
+    $l{ymd_format} = '%Y-%m-%d';
+    $l{description} = 'Ich habe Anzeige Tweets auf den neuesten Perl zusammen.';
+    $l{keywords} = 'Perl,Twitter,Tweet,Nachrichten';
+  }
+  # France
+  elsif ($language eq 'fr') {
+    $l{title} = 'Perl Tweet chronologie nouvellesc';
+    $l{yesterday} = 'hier';
+    $l{today} = "aujourd'hui";
+    $l{previous_date} = "Jour d'avant";
+    $l{next_date} = 'Lendemain';
+    $l{ymd_format} = '%Y-%m-%d';
+    $l{description} = "J'ai tweets d'affichage liés à la dernière Perl.";
+    $l{keywords} = 'Perl,Twitter,Tweet,nouvelles';
   }
   
   my $date = param('date');
