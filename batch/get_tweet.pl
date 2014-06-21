@@ -59,6 +59,7 @@ for my $language (@$languages) {
     my $user_screen_name = $tweet->{user}{screen_name};
     
     # Insert database
+    next unless $text =~ /perl/i;
     my $params = {
       id => $id,
       tweet_text => $text,
