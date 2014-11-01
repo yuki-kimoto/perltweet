@@ -60,6 +60,7 @@ for my $language (@$languages) {
     
     # Insert database
     next unless $text =~ /perl/i;
+    next if $text =~ /\@([a-zA-Z0-9_-]+)?perl([a-zA-Z0-9_-]+)?\s/;
     my $params = {
       id => $id,
       tweet_text => $text,
