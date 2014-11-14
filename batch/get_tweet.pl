@@ -32,8 +32,23 @@ my $max_id = $dbi->model('tweet')->select('max(id)')->value // 0;
 # Langages
 my $languages = ['ja', 'en', 'zh', 'es', 'de', 'fr'];
 
-for my $language (@$languages) {
+my $url_re = qr#http://[\/\.a-zA-Z0-9]+#;
 
+for my $language (@$languages) {
+  
+  # Latest tweets
+  my $latest_tweet_texts = $dbi->model('tweet')->select(
+    'tweet_text',
+    where => {language => $language},
+    append => 'order by row_id desc limit 0, 500'
+  )->values;
+  my $latest_tweet_text_no_urls_h = {};
+  for my $latest_tweet_text (@$latest_tweet_texts) {
+    my $latest_tweet_text_no_url = $latest_tweet_text;
+    $latest_tweet_text_no_url =~ s/$url_re//g;
+    $latest_tweet_text_no_urls_h->{$latest_tweet_text_no_url} = 1;
+  }
+  
   # Search
   my $query = {
     q => 'perl',
@@ -59,8 +74,19 @@ for my $language (@$languages) {
     my $user_screen_name = $tweet->{user}{screen_name};
     
     # Insert database
+    
+    # Skip when tweet don't contain in perl
     next unless $text =~ /perl/i;
+    
+    # Skip when @username contain perl
     next if $text =~ /\@([a-zA-Z0-9_-]+)?perl([a-zA-Z0-9_-]+)?\s/;
+    
+    # Skip same tweet
+    my $tweet_text_no_url = $text;
+    $tweet_text_no_url =~ s/$url_re//g;
+    next if $latest_tweet_text_no_urls_h->{$tweet_text_no_url};
+    $latest_tweet_text_no_urls_h->{$tweet_text_no_url} = 1;
+    
     my $params = {
       id => $id,
       tweet_text => $text,
