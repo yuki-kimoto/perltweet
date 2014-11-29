@@ -79,11 +79,12 @@ for my $language (@$languages) {
     next unless $text =~ /perl/i;
     
     # Skip when @username contain perl
-    next if $text =~ /\@([a-zA-Z0-9_-]+)?perl([a-zA-Z0-9_-]+)?\s/;
+    next if $text =~ /\@([a-zA-Z0-9_-]+)?perl([a-zA-Z0-9_-]+)?\s/i;
     
     # Skip same tweet
     my $tweet_text_no_url = $text;
     $tweet_text_no_url =~ s/$url_re//g;
+    $tweet_text_no_url =~ s/\@([a-zA-Z0-9_-]+) //g;
     next if $latest_tweet_text_no_urls_h->{$tweet_text_no_url};
     $latest_tweet_text_no_urls_h->{$tweet_text_no_url} = 1;
     
