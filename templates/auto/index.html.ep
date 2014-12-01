@@ -136,7 +136,7 @@
       <ul>
         % for (my $i = 0; $i < @$tweets; $i++) {
           % my $tweet = $tweets->[$i];
-          <li style="<%= ($i + 1) % 10 == 0 ? 'margin-bottom:20px' : '' %>">
+          <li style="font-size:18px;<%= ($i + 1) % 10 == 0 ? 'margin-bottom:20px' : '' %>">
             % my $url = $tweet->{url};
             % if ($url) {
               <a href="<%= $url %>"><%= $tweet->{tweet_text} %></a>
