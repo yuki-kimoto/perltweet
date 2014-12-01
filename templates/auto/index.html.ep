@@ -133,23 +133,6 @@
         <h2><%= $date_wa %></h2>
       % }
 
-      <div>
-<style>
-.my_adslot { width: 320px; height: 50px; }
-@media(min-width: 500px) { .my_adslot { width: 468px; height: 60px; } }
-@media(min-width: 800px) { .my_adslot { width: 728px; height: 90px; } }
-</style>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle my_adslot"
-     style="display:inline-block"
-     data-ad-client="ca-pub-7761029077825443"
-     data-ad-slot="1687374568"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</script>
-      </div>
-
       <ul>
         % for (my $i = 0; $i < @$tweets; $i++) {
           % my $tweet = $tweets->[$i];
@@ -167,20 +150,6 @@
           </li>
         % }
       </ul>
-
-<style>
-.my_adslot { width: 320px; height: 50px; }
-@media(min-width: 500px) { .my_adslot { width: 468px; height: 60px; } }
-@media(min-width: 800px) { .my_adslot { width: 728px; height: 90px; } }
-</style>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<ins class="adsbygoogle my_adslot"
-     style="display:inline-block"
-     data-ad-client="ca-pub-7761029077825443"
-     data-ad-slot="1687374568"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
 
       <hr>
       <ul class="list-unstyled" style="text-align:center">
