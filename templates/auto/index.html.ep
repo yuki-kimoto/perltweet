@@ -139,7 +139,7 @@
           <li style="font-size:18px;<%= ($i + 1) % 10 == 0 ? 'margin-bottom:20px' : '' %>">
             % my $url = $tweet->{url};
             % if ($url) {
-              <a href="<%= $url %>"><%= $tweet->{tweet_text} %></a>
+              <a href="<%= $url %>"><%== $tweet->{tweet_text} %></a>
             % } else {
               <%= $tweet->{tweet_text} %>
             % }
