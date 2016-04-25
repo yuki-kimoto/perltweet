@@ -74,6 +74,9 @@ for my $language (@$languages) {
     my $user_screen_name = $tweet->{user}{screen_name};
     
     # Insert database
+
+    # Skip when perl6 contains
+    next if $text =~ /perl\s*6/i;
     
     # Skip when tweet don't contain in perl
     next unless $text =~ /perl/i;
