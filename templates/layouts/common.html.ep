@@ -2,10 +2,10 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title><%= $l->{title} %></title>
+    <title><%= $title %></title>
     <link rel="shortcut icon" href="<%= url_for('/perltweet-favicon.png') %>" type="image/png" >
-    <meta name="description" content="<%= $l->{description} %>">
-    <meta name="keywords" content="<%= $l->{keywords} %>">
+    <meta name="description" content="<%= $description %>">
+    <meta name="keywords" content="<%= $keywords %>">
     <meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 
     %= javascript '/js/jquery-1.10.2.js';

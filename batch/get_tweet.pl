@@ -30,7 +30,7 @@ my $nt = Net::Twitter::Lite::WithAPIv1_1->new(
 my $max_id = $dbi->model('tweet')->select('max(id)')->value // 0;
 
 # Langages
-my $languages = ['ja', 'en', 'zh', 'es', 'de', 'fr'];
+my $languages = ['ja', 'en'];
 
 my $url_re = qr#http://[\/\.a-zA-Z0-9]+#;
 
