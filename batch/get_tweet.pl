@@ -40,7 +40,7 @@ for my $language (@$languages) {
   my $latest_tweet_texts = $dbi->model('tweet')->select(
     'tweet_text',
     where => {language => $language},
-    append => 'order by row_id desc limit 0, 500'
+    append => 'order by row_id desc limit 0, 3000'
   )->values;
   my $latest_tweet_text_no_urls_h = {};
   for my $latest_tweet_text (@$latest_tweet_texts) {
