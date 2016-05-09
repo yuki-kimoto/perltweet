@@ -93,6 +93,7 @@ for my $language (@$languages) {
     
     # Skip bot
     next if $user_screen_name eq 'PerlManiaJP';
+    next if $user_screen_name eq 'rikeikare_bot';
     
     my $params = {
       id => $id,
