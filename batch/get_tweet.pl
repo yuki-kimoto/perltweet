@@ -91,6 +91,9 @@ for my $language (@$languages) {
     next if $latest_tweet_text_no_urls_h->{$tweet_text_no_url};
     $latest_tweet_text_no_urls_h->{$tweet_text_no_url} = 1;
     
+    # Skip bot
+    next if $user_screen_name eq 'PerlManiaJP';
+    
     my $params = {
       id => $id,
       tweet_text => $text,
