@@ -3,18 +3,39 @@
   use Time::Seconds 'ONE_DAY';
   use Encode ();
 
-  my $title = 'Perlツイートタイムラインニュース';
-  my $yesterday = '昨日';
-  my $today = '今日';
-  my $previous_date = '前の日';
-  my $next_date = '次の日';
-  my $ymd_format = '%Y年%m月%d日';
-  my $description = '最新のPerlに関連するツイートを表示しています。';
-  my $keywords = 'Perl,Twitter,ツイート,ニュース';
+  my $language = param('lang') // 'ja';
+
+  my $title;
+  my $yesterday;
+  my $today;
+  my $previous_date;
+  my $next_date;
+  my $ymd_format;
+  my $description;
+  my $keywords;
+  if ($language eq 'ja') {
+    $title = 'Perlツイートタイムラインニュース';
+    $yesterday = '昨日';
+    $today = '今日';
+    $previous_date = '前の日';
+    $next_date = '次の日';
+    $ymd_format = '%Y年%m月%d日';
+    $description = '最新のPerlに関連するツイートを表示しています。';
+    $keywords = 'Perl,Twitter,ツイート,ニュース';
+  }
+  elsif ($language eq 'en') {
+    $title = 'Perl Tweet Timeline News';
+    $yesterday = 'Yesterday';
+    $today = 'Today';
+    $previous_date = 'Privious day';
+    $next_date = 'Next day';
+    $ymd_format = '%Y/%m/%d';
+    $description = 'Display latest Perl tweet';
+    $keywords = 'Perl,Twitter,Tweet,News';
+  }
   
   my $date = param('date');
   my $format = param('format') // '';
-  my $language = param('lang') // 'ja';
   
   my $tweets;
   my $date_tp;
@@ -70,11 +91,11 @@
       <h1 class="title"><a href="<%= url_for('/') %>"><%= $title %></a></h1>
       % if ($language eq 'ja') {
         <div style="font-size:18px;margin-bottom:7px;">
-          <b>日本語の情報</b> | <a href="<%= url_with->query([lang => 'en']) %>">英語の情報</a>
+          <b>日本語の情報</b> | <a href="<%= url_with->query([lang => 'en']) %>">English Information</a>
         </div>
       % } else {
         <div style="font-size:18px;margin-bottom:7px;">
-          <a href="<%= url_with->query([lang => undef]) %>">日本語の情報</a> | <b>英語の情報</b>
+          <a href="<%= url_with->query([lang => undef]) %>">日本語の情報</a> | <b>English Information</b>
         </div>
       % }
       
