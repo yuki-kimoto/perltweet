@@ -4,6 +4,7 @@
   use Encode ();
 
   my $language = param('lang') // 'ja';
+  my $category = param('category') // '';
 
   my $title;
   my $yesterday;
@@ -42,26 +43,50 @@
   my $before_date_tp;
   my $after_date_tp;
   my $date_wa;
+  my $where = app->dbi->where;
+  my $append;
+  my $where_clause;
+  my $where_param;
   if ($date) {
     # Date tweets
     $date_tp = Time::Piece->strptime($date, '%Y%m%d');
     my $date_db = $date_tp->strftime('%Y-%m-%d');
     $date_wa = Encode::decode('UTF-8', $date_tp->strftime($ymd_format));
-    $tweets = app->dbi->model('tweet')->select(
-      where => {created_at_date => $date_db, language => $language},
-      append => 'order by id desc'
-    )->all;
     $before_date_tp = $date_tp - ONE_DAY;
     $after_date_tp = $date_tp + ONE_DAY;
+    $where_clause = ['and', ':created_at_date{=}', ':language{=}'];
+    $where_param = {created_at_date => $date_db, language => $language};
+    $append = 'order by id desc';
   }
   else {
-    # Latest tweets
-    $tweets = app->dbi->model('tweet')->select(
-      where => {language => $language},
-      append => 'order by id desc limit 0, 200'
-    )->all;
+    $where_clause = ['and', ':language{=}'];
+    $where_param = {language => $language};
+    $append = 'order by id desc limit 0, 200';
   }
   
+  if ($language eq 'en') {
+    
+    if ($category eq 'job') {
+      push @$where_clause, ['or', ('tweet_text like :tweet_text') x 3, ('user_screen_name like :user_screen_name') x 3];
+      $where_param->{tweet_text} = ['%job%', 'job%', '%job'];
+      $where_param->{user_screen_name} = ['%job%', 'job%', '%job'];
+    }
+    else {
+      push @$where_clause, ['and', ('tweet_text not like :tweet_text') x 3];
+      $where_param->{tweet_text} = ['%job%', 'job%', '%job'];
+
+      push @$where_clause, ['and', ('user_screen_name not like :user_screen_name') x 3];
+      $where_param->{user_screen_name} = ['%job%', 'job%', '%job'];
+    }
+  }
+  $where->clause($where_clause);
+  $where->param($where_param);
+  
+  $tweets = app->dbi->model('tweet')->select(
+    where => $where,
+    append => $append
+  )->all;
+
   if ($format eq 'json') {
     $self->render(json => $tweets);
     return;
@@ -91,12 +116,24 @@
       <h1 class="title"><a href="<%= url_for('/') %>"><%= $title %></a></h1>
       % if ($language eq 'ja') {
         <div style="font-size:18px;margin-bottom:7px;">
-          <b>日本語の情報</b> | <a href="<%= url_with->query([lang => 'en']) %>">English Information</a>
+          <b>日本語の情報</b>
+          | <a href="<%= url_with->query([lang => 'en', category => undef]) %>">English Information</a>
+          | <a href="<%= url_with->query([lang => 'en', category => 'job']) %>">Job Information</a>
         </div>
       % } else {
-        <div style="font-size:18px;margin-bottom:7px;">
-          <a href="<%= url_with->query([lang => undef]) %>">日本語の情報</a> | <b>English Information</b>
-        </div>
+        % if ($category eq 'job') {
+          <div style="font-size:18px;margin-bottom:7px;">
+            <a href="<%= url_with->query([lang => undef, category => undef]) %>">日本語の情報</a>
+            | <a href="<%= url_with->query([lang => 'en', category => undef]) %>">English Information</a>
+            | <b>Job Information</b>
+          </div>
+        % } else {
+          <div style="font-size:18px;margin-bottom:7px;">
+            <a href="<%= url_with->query([lang => undef, category => undef]) %>">日本語の情報</a>
+            | <b>English Information</b>
+            | <a href="<%= url_with->query([lang => 'en', category => 'job']) %>">Job Information</a>
+          </div>
+        % }
       % }
       
       % if ($date_wa) {
