@@ -67,14 +67,30 @@
   if ($language eq 'en') {
     
     if ($category eq 'job') {
+      # Job
       push @$where_clause, ['or', ('tweet_text like :tweet_text') x 3, ('user_screen_name like :user_screen_name') x 3];
       $where_param->{tweet_text} = ['%job%', 'job%', '%job'];
       $where_param->{user_screen_name} = ['%job%', 'job%', '%job'];
     }
-    else {
+    elsif ($category eq 'cpan') {
+      # CPAN
+      my @conditions = map { "tweet_text like '%-$_%'" } (0 .. 9);
+      push @$where_clause, ['or', @conditions];
+
+      # Not job
       push @$where_clause, ['and', ('tweet_text not like :tweet_text') x 3];
       $where_param->{tweet_text} = ['%job%', 'job%', '%job'];
-
+      push @$where_clause, ['and', ('user_screen_name not like :user_screen_name') x 3];
+      $where_param->{user_screen_name} = ['%job%', 'job%', '%job'];
+    }
+    else {
+      # Not CPAN
+      my @not_cpan_conditions = map { "tweet_text not like '%-$_%'" } (0 .. 9);
+      push @$where_clause, ['and', @not_cpan_conditions];
+      
+      # Not job
+      push @$where_clause, ['and', ('tweet_text not like :tweet_text') x 3];
+      $where_param->{tweet_text} = ['%job%', 'job%', '%job'];
       push @$where_clause, ['and', ('user_screen_name not like :user_screen_name') x 3];
       $where_param->{user_screen_name} = ['%job%', 'job%', '%job'];
     }
@@ -114,27 +130,31 @@
   <body>
     <div class="container">
       <h1 class="title"><a href="<%= url_for('/') %>"><%= $title %></a></h1>
-      % if ($language eq 'ja') {
-        <div style="font-size:18px;margin-bottom:7px;">
-          <b>日本語の情報</b>
-          | <a href="<%= url_with->query([lang => 'en', category => undef]) %>">English Information</a>
-          | <a href="<%= url_with->query([lang => 'en', category => 'job']) %>">Job Information</a>
-        </div>
-      % } else {
-        % if ($category eq 'job') {
-          <div style="font-size:18px;margin-bottom:7px;">
+      <div style="font-size:18px;margin-bottom:7px;">
+        % if ($language eq 'ja') {
+            <b>日本語の情報</b>
+            | <a href="<%= url_with->query([lang => 'en', category => undef]) %>">English Information</a>
+            | <a href="<%= url_with->query([lang => 'en', category => 'cpan']) %>">CPAN Information</a>
+            | <a href="<%= url_with->query([lang => 'en', category => 'job']) %>">Job Information</a>
+        % } else {
+          % if ($category eq 'job') {
             <a href="<%= url_with->query([lang => undef, category => undef]) %>">日本語の情報</a>
             | <a href="<%= url_with->query([lang => 'en', category => undef]) %>">English Information</a>
+            | <a href="<%= url_with->query([lang => 'en', category => 'cpan']) %>">CPAN Information</a>
             | <b>Job Information</b>
-          </div>
-        % } else {
-          <div style="font-size:18px;margin-bottom:7px;">
+          % } elsif ($category eq 'cpan') {
+            <a href="<%= url_with->query([lang => undef, category => undef]) %>">日本語の情報</a>
+            | <a href="<%= url_with->query([lang => 'en', category => undef]) %>">English Information</a>
+            | <b>CPAN Information</b>
+            | <a href="<%= url_with->query([lang => 'en', category => 'job']) %>">Job Information</a>
+          % } else {
             <a href="<%= url_with->query([lang => undef, category => undef]) %>">日本語の情報</a>
             | <b>English Information</b>
+            | <a href="<%= url_with->query([lang => 'en', category => 'cpan']) %>">CPAN Information</a>
             | <a href="<%= url_with->query([lang => 'en', category => 'job']) %>">Job Information</a>
-          </div>
+          % }
         % }
-      % }
+      </div>
       
       % if ($date_wa) {
         <h2><%= $date_wa %></h2>
