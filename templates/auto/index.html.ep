@@ -164,11 +164,18 @@
         % for (my $i = 0; $i < @$tweets; $i++) {
           % my $tweet = $tweets->[$i];
           <li style="font-size:18px;<%= ($i + 1) % 10 == 0 ? 'margin-bottom:20px' : '' %>">
-            % my $url = $tweet->{url};
+            <%
+              my $url = $tweet->{url};
+              my $tweet_text = $tweet->{tweet_text};
+              $tweet_text =~ s/\&gt;/>/g;
+              $tweet_text =~ s/\&lt;/</g;
+              $tweet_text =~ s/\&amp;/&/g;
+            %>
+            
             % if ($url) {
-              <a href="<%= $url %>"><%== $tweet->{tweet_text} %></a>
+              <a href="<%= $url %>"><%= $tweet_text %></a>
             % } else {
-              <%= $tweet->{tweet_text} %>
+              <%= $tweet_text %>
             % }
             (<a target="_blank" href="<%= "https://twitter.com/$tweet->{user_screen_name}/status/$tweet->{id}" %>"><%= $tweet->{user_screen_name} %></a>
             
