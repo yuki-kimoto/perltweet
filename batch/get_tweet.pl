@@ -77,6 +77,11 @@ for my $language (@$languages) {
 
     # Skip when perl6 contains
     next if $text =~ /perl\s*6/i;
+
+    # Skip Perl dram tweet
+    next if $text =~ /スティック/;
+    next if $text =~ /ドラム/;
+    next if $text =~ /ペダル/;
     
     # Skip when tweet don't contain in perl
     next unless $text =~ /perl/i;
@@ -95,7 +100,7 @@ for my $language (@$languages) {
     next if $user_screen_name eq 'PerlManiaJP';
     next if $user_screen_name eq 'rikeikare_bot';
     next if $user_screen_name =~ /_bot/i;
-    
+
     my $params = {
       id => $id,
       tweet_text => $text,
