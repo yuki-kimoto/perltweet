@@ -96,11 +96,17 @@ for my $language (@$languages) {
     next if $text =~ /\@([a-zA-Z0-9_-]+)?perl([a-zA-Z0-9_-]+)?\s/i;
     
     # Skip same tweet
-    my $tweet_text_no_url = $text;
-    $tweet_text_no_url =~ s/$url_re//g;
-    $tweet_text_no_url =~ s/\@([a-zA-Z0-9_-]+) //g;
-    next if $latest_tweet_text_no_urls_h->{$tweet_text_no_url};
-    $latest_tweet_text_no_urls_h->{$tweet_text_no_url} = 1;
+    {
+      my $tweet_text_no_url = $text;
+      $tweet_text_no_url =~ s/$url_re//g;
+      $tweet_text_no_url =~ s/\@([a-zA-Z0-9_-]+) //g;
+      
+      # Remove data and time
+      $tweet_text_no_url =~ s/[0-9\/\:\-]//g;
+      
+      next if $latest_tweet_text_no_urls_h->{$tweet_text_no_url};
+      $latest_tweet_text_no_urls_h->{$tweet_text_no_url} = 1;
+    }
     
     # Skip bot
     next if $user_screen_name eq 'PerlManiaJP';
