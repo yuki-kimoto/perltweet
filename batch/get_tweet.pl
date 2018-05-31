@@ -78,6 +78,9 @@ for my $language (@$languages) {
     # Skip when perl6 contains
     next if $text =~ /perl\s*6/i;
 
+    # Skip when Perl様 contains
+    next if $text =~ /Perl様/i;
+
     # Skip when ruby contains
     next if $text =~ /ruby/i;
 
