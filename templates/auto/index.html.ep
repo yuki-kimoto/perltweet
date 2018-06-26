@@ -15,23 +15,23 @@
   my $description;
   my $keywords;
   if ($language eq 'ja') {
-    $title = 'Perlツイートタイムラインニュース';
+    $title = 'Perlニュースピックアップ';
     $yesterday = '昨日';
     $today = '今日';
     $previous_date = '前の日';
     $next_date = '次の日';
     $ymd_format = '%Y年%m月%d日';
-    $description = '最新のPerlに関連するツイートを表示しています。';
+    $description = 'Perlのツイートをニュースで読もう';
     $keywords = 'Perl,Twitter,ツイート,ニュース';
   }
   elsif ($language eq 'en') {
-    $title = 'Perl Tweet Timeline News';
+    $title = 'Perl News Pickup';
     $yesterday = 'Yesterday';
     $today = 'Today';
     $previous_date = 'Privious day';
     $next_date = 'Next day';
     $ymd_format = '%Y/%m/%d';
-    $description = 'Display latest Perl tweet';
+    $description = 'Read Perl tweet as news';
     $keywords = 'Perl,Twitter,Tweet,News';
   }
   
@@ -115,6 +115,12 @@
 %= stylesheet begin
   h1 a {
     color:black;
+    font-size:26px;
+    background:pink;
+    color:white;
+    margin:0;
+    padding:10px 20px;
+    text-align:center;
   }
   h1 a:hover {
     color:blue;
@@ -130,6 +136,7 @@
   <body>
     <div class="container">
       <h1 class="title"><a href="<%= url_for('/') %>"><%= $title %></a></h1>
+      <div><%= $description %></div>
       <div style="font-size:18px;margin-bottom:7px;">
         % if ($language eq 'ja') {
             <b>日本語の情報</b>
