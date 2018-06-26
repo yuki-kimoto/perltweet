@@ -15,7 +15,7 @@
   my $description;
   my $keywords;
   if ($language eq 'ja') {
-    $title = 'Perlニュースピックアップ';
+    $title = 'Perlツイートニュース';
     $yesterday = '昨日';
     $today = '今日';
     $previous_date = '前の日';
@@ -25,7 +25,7 @@
     $keywords = 'Perl,Twitter,ツイート,ニュース';
   }
   elsif ($language eq 'en') {
-    $title = 'Perl News Pickup';
+    $title = 'Perl Tweet News';
     $yesterday = 'Yesterday';
     $today = 'Today';
     $previous_date = 'Privious day';
