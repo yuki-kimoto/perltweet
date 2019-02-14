@@ -87,6 +87,13 @@ for my $language (@$languages) {
     # Skip when python contains
     next if $text =~ /python/i;
 
+    # Skip when go contains
+    next if $text =~ /\bgo\b/i;
+    next if $text =~ /golang/i;
+
+    # Skip when go contains
+    next if $text =~ /scala/i;
+
     # Skip Perl dram tweet
     next if $text =~ /スティック/;
     next if $text =~ /ドラム/;
