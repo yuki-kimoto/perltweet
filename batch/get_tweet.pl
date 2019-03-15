@@ -88,7 +88,7 @@ for my $language (@$languages) {
     next if $text =~ /python/i;
 
     # Skip when go contains
-    next if $text =~ /\bgo\b/i;
+    next if $text =~ /\bgo\b/ia;
     next if $text =~ /golang/i;
 
     # Skip when go contains
