@@ -91,7 +91,7 @@ for my $language (@$languages) {
     next if $text =~ /\bgo\b/ia;
     next if $text =~ /golang/i;
 
-    # Skip when go contains
+    # Skip when scala contains
     next if $text =~ /scala/i;
 
     # Skip Perl dram tweet
@@ -101,6 +101,12 @@ for my $language (@$languages) {
     
     # Skip when tweet don't contain in perl
     next unless $text =~ /perl/i;
+    
+    # Skip if upper case PERL
+    next if $text =~ /PERL/;
+    
+    # Skip if $perl
+    next if $text =~ /\$perl/i;
     
     # Skip when @username contain perl
     next if $text =~ /\@([a-zA-Z0-9_-]+)?perl([a-zA-Z0-9_-]+)?\s/i;
