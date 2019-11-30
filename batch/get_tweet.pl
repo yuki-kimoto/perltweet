@@ -118,10 +118,14 @@ for my $language (@$languages) {
       $latest_tweet_text_no_urls_h->{$tweet_text_no_url} = 1;
     }
     
-    # Skip bot
+    # Skip bot and spam and Perl negative campane
     next if $user_screen_name eq 'PerlManiaJP';
     next if $user_screen_name eq 'rikeikare_bot';
     next if $user_screen_name =~ /_bot/i;
+    next if $user_screen_name eq 'ShinaiMuri';
+    next if $user_screen_name eq 'peacedavives';
+    next if $user_screen_name eq 'mrt33185622';
+    
 
     my $params = {
       id => $id,
