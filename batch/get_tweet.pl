@@ -87,6 +87,9 @@ for my $language (@$languages) {
     # Skip when python contains
     next if $text =~ /python/i;
 
+    # Skip when node contains
+    next if $text =~ /node/i;
+
     # Skip when go contains
     next if $text =~ /\bgo\b/ia;
     next if $text =~ /golang/i;
@@ -107,9 +110,6 @@ for my $language (@$languages) {
     
     # Skip if $perl
     next if $text =~ /\$perl/i;
-    
-    # Skip when @username contain perl
-    next if $text =~ /\@([a-zA-Z0-9_-]+)?perl([a-zA-Z0-9_-]+)?\s/i;
     
     # Skip same tweet
     {
