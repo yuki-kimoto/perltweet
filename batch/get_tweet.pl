@@ -131,6 +131,7 @@ for my $language (@$languages) {
     next if $user_screen_name eq 'ShinaiMuri';
     next if $user_screen_name eq 'peacedavives';
     next if $user_screen_name eq 'mrt33185622';
+    next if $user_screen_name eq 'DORAN_Perl';
     
 
     my $params = {
