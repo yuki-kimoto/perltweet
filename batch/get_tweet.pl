@@ -111,6 +111,12 @@ for my $language (@$languages) {
     
     # Skip if $perl
     next if $text =~ /\$perl/i;
+
+    # Skip if contain @Perl_xxx
+    next if $text =~ /\@Perl_pad/;
+    next if $text =~ /\@perl_15c/;
+    next if $text =~ /\@Perl_rainxx_sky/;
+    next if $text =~ /\@nuko_perl/;
     
     # Skip same tweet
     {
