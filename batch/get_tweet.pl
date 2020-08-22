@@ -117,6 +117,7 @@ for my $language (@$languages) {
     next if $text =~ /\@perl_15c/;
     next if $text =~ /\@Perl_rainxx_sky/;
     next if $text =~ /\@nuko_perl/;
+    next if $text =~ /\@DORAN_Perl/;
     
     # Skip same tweet
     {
