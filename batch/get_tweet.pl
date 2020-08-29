@@ -102,6 +102,9 @@ for my $language (@$languages) {
     next if $text =~ /ドラム/;
     next if $text =~ /ドラマー/;
     next if $text =~ /ペダル/;
+
+    # Skip Perl juel tweet
+    next if $text =~ /ピアス/;
     
     # Skip when tweet don't contain in perl
     next unless $text =~ /perl/i;
