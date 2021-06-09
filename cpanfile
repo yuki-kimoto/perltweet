@@ -10,3 +10,4 @@ requires 'Time::Piece', '== 1.23';
 requires 'Net::OAuth', '== 0.28';
 requires 'Time::HiRes', '== 1.9726';
 requires 'Mojolicious', '== 9.19';
+requires 'Mojolicious::Plugin::DBViewer', '== 0.30';
