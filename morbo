@@ -1,6 +1,3 @@
 #!/bin/sh
 
-DIR=$(dirname $0)
-PERL5LIB="$DIR/mojo/lib:$DIR/extlib/lib/perl5"
-export PERL5LIB
-$DIR/mojo/script/morbo $* $DIR/script/perltweet
+morbo $* script/perltweet

@@ -6,7 +6,6 @@ use Mojo::Base 'Mojolicious';
 use DBIx::Custom;
 use Perltweet::API;
 use Scalar::Util 'weaken';
-use Mojolicious::Plugin::AutoRoute::Util 'template';
 use Carp 'croak';
 
 has 'dbi';
@@ -67,7 +66,7 @@ sub startup {
   # Auto routes
   $self->plugin('AutoRoute', route => $r);
   
-  $r->get('/date/:date', {date => qr/[0-9]{8}/} => template 'auto/index');
+  $r->get('/date/:date', {date => qr/[0-9]{8}/} => sub { shift->render_maybe('auto/index') });
   
   # Helper
   $self->helper(wiki_api => sub { Perltweet::API->new(shift) });
