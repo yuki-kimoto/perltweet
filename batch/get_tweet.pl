@@ -124,6 +124,11 @@ for my $language (@$languages) {
     next if $text =~ /\@sapphire_Perl/;
     next if $text =~ /\@_pslem_perl/;
     next if $text =~ /\@Perl__/;
+    next if $text =~ /\@Perl_Alpha\b/;
+    next if $text =~ /\@lineage_Perl\b/;
+    next if $text =~ /\@Perl_30_ayana\b/;
+    next if $text =~ /\@perl_0526\b/;
+    next if $text =~ /\@Perl_dream\b/;
 
     # Skip same tweet
     {
