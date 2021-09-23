@@ -73,6 +73,9 @@ for my $language (@$languages) {
     my $retweet_count = $tweet->{retweet_count};
     my $user_screen_name = $tweet->{user}{screen_name};
     
+    # テキストからユーザー名を取り除いて判定
+    $text =~ s/\b\@\w+\b//ag;
+    
     # Insert database
 
     # Skip when perl6 contains
@@ -124,7 +127,7 @@ for my $language (@$languages) {
     next if $text =~ /\@sapphire_Perl/;
     next if $text =~ /\@_pslem_perl/;
     next if $text =~ /\@Perl__/;
-
+    
     # Skip same tweet
     {
       my $tweet_text_no_url = $text;
