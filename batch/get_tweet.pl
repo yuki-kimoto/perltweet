@@ -74,7 +74,7 @@ for my $language (@$languages) {
     my $user_screen_name = $tweet->{user}{screen_name};
     
     # テキストからユーザー名を取り除いて判定
-    $text =~ s/\b\@\w+\b//ag;
+    $text =~ s/\@\w+//ag;
     
     # Insert database
 
