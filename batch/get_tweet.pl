@@ -73,6 +73,8 @@ for my $language (@$languages) {
     my $retweet_count = $tweet->{retweet_count};
     my $user_screen_name = $tweet->{user}{screen_name};
     
+    my $original_text = $text;
+    
     # テキストからユーザー名を取り除いて判定
     $text =~ s/\@\w+//ag;
     
@@ -144,7 +146,7 @@ for my $language (@$languages) {
 
     my $params = {
       id => $id,
-      tweet_text => $text,
+      tweet_text => $original_text,
       url => $url,
       created_at => $created_at_mysql_dt,
       created_at_date => $created_at_mysql_date,
