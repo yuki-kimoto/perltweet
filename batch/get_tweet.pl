@@ -1,4 +1,4 @@
-#!/bin/env perl
+#!/usr/bin/env perl
 
 use strict;
 use warnings;
@@ -118,16 +118,6 @@ for my $language (@$languages) {
     # Skip if $perl
     next if $text =~ /\$perl/i;
 
-    # Skip if contain @Perl_xxx
-    next if $text =~ /\@Perl_pad/;
-    next if $text =~ /\@perl_15c/;
-    next if $text =~ /\@Perl_rainxx_sky/;
-    next if $text =~ /\@nuko_perl/;
-    next if $text =~ /\@DORAN_Perl/;
-    next if $text =~ /\@sapphire_Perl/;
-    next if $text =~ /\@_pslem_perl/;
-    next if $text =~ /\@Perl__/;
-    
     # Skip same tweet
     {
       my $tweet_text_no_url = $text;
